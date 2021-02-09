@@ -5,7 +5,7 @@ import com.google.gwt.user.client.ui.*;
 
 public class MessagesWidget extends ScrollPanel {
     VerticalPanel panel = new VerticalPanel();
-
+    String width;
     public MessagesWidget(String name, String icon, String width) {
         Image image = new Image("" + icon);
         Label label = new Label(name);
@@ -17,7 +17,7 @@ public class MessagesWidget extends ScrollPanel {
         this.setHeight("" + (Window.getClientHeight() - 400));
         panel.setStyleName("elements_diff_style");
         this.setStyleName("users_widget_style");
-
+        this.width = width;
     }
 
     public void addMessage(Widget message) {
@@ -26,5 +26,9 @@ public class MessagesWidget extends ScrollPanel {
 
     public void clearMsgs() {
         panel.clear();
+    }
+
+    public String getWidth() {
+        return width;
     }
 }

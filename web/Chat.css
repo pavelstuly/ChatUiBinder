@@ -11,9 +11,8 @@ body, td, a, div, .p {
 }
 
 .message_widget_style {
-    border: solid;
-    border-color: black;
-    border-radius: 5px;
+    border-bottom: 1px solid limegreen;
+    margin-top: 5px;
 }
 
 .user_widget_style {

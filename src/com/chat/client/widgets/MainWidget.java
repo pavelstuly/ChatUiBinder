@@ -37,42 +37,6 @@ public class MainWidget extends HorizontalPanel {
         this.sessionId = generateSessionId();
         expose();
         connectWS(sessionId);
-        Timer timer = new Timer() {
-            @Override
-            public void run() {
-
-
-                ChatService.App.getInstance().setUser(sessionId, login, new AsyncCallback<Void>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        Window.alert("error" + caught.getMessage());
-                    }
-
-                    @Override
-                    public void onSuccess(Void result) {
-                        ChatService.App.getInstance().getMessages(new AsyncCallback<List<Message>>() {
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                Window.alert("error" + caught.getMessage());
-                            }
-
-                            @Override
-                            public void onSuccess(List<Message> result) {
-                                for (Message m : result) {
-                                    mv.addMessage(new MessageWidget(m.getLogin(), lg.equals(m.getLogin()) ? "images/me_pic.png" : "images/user_male.png", m.getText(), 1242353, "" + (Window.getClientWidth() - 310)));
-
-                                }
-                                mv.scrollToBottom();
-                            }
-                        });
-                    }
-                });
-            }
-        };
-        //time to initialize...
-        timer.schedule(1000);
-
-
     }
 
     public static void connect() {
@@ -94,7 +58,12 @@ public class MainWidget extends HorizontalPanel {
                     @Override
                     public void onSuccess(List<Message> result) {
                         for (Message m : result) {
-                            mv.addMessage(new MessageWidget(m.getLogin(), lg.equals(m.getLogin()) ? "images/me_pic.png" : "images/user_male.png", m.getText(), 1242353, "" + (Window.getClientWidth() - 310)));
+                            String imageName = "";
+                            if (m.getLogin().equals(lg)) imageName = "images/me_pic.png";
+                            else imageName = "images/user_male.png";
+                            if (m.getLogin().equals("Чат")) imageName = "images/chat.png";
+
+                            mv.addMessage(new MessageWidget(m.getLogin(), imageName, m.getText(), 1242353, mv.getWidth()));
 
                         }
                         mv.scrollToBottom();
@@ -123,7 +92,7 @@ public class MainWidget extends HorizontalPanel {
 
 
                         }
-                        mv.addMessage(new MessageWidget("Чат", "images/chat.png", push.getTextMessage(), 43534, "" + (Window.getClientWidth() - 350)));
+                        mv.addMessage(new MessageWidget("Чат", "images/chat.png", push.getTextMessage(), 43534, mv.getWidth()));
                         mv.scrollToBottom();
                     }
                 });
@@ -134,7 +103,7 @@ public class MainWidget extends HorizontalPanel {
             }
             break;
             case MESSAGE: {
-                mv.addMessage(new MessageWidget(push.getLogin(), (lg.equals(lg)) ? "images/me_pic.png" : "images/user_male.png", push.getTextMessage(), 43534, "" + (Window.getClientWidth() - 350)));
+                mv.addMessage(new MessageWidget(push.getLogin(), (lg.equals(lg)) ? "images/me_pic.png" : "images/user_male.png", push.getTextMessage(), 43534, mv.getWidth()));
                 mv.scrollToBottom();
             }
             break;

@@ -69,13 +69,9 @@ public class ChatServiceImpl extends RemoteServiceServlet implements ChatService
         push.setLogin(login);
         push.setSessionId(sessionId);
 
-        Message message = new Message();
-        message.setText(text);
-        message.setTimestamp(System.currentTimeMillis());
-        message.setLogin(login);
-        Jedis j = ServerProvider.getInstance().pool.getResource();
-        j.set("test:message:" + System.currentTimeMillis(), ServerProvider.getInstance().gson.toJson(message));
-        j.close();
+
+        ServerProvider.getInstance().writeRedisEvent(login, sessionId, text);
+
         ServerProvider.getInstance().chatSessionsManager.pushAll(push);
 
 
@@ -89,7 +85,6 @@ public class ChatServiceImpl extends RemoteServiceServlet implements ChatService
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        ServerProvider.getInstance();
         String path = config.getServletContext().getRealPath("/") + "WEB-INF\\";
 
         path = path.replace("\\", "//");
@@ -101,6 +96,7 @@ public class ChatServiceImpl extends RemoteServiceServlet implements ChatService
             FileInputStream fis = new FileInputStream(path + "config.properties");
             Properties properties = new Properties();
             properties.load(fis);
+            ServerProvider.getInstance().initRedis(properties);
 
         } catch (Exception e) {
             e.printStackTrace();

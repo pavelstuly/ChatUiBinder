@@ -45,6 +45,7 @@ public class ChatSessionManager implements WebSocketManager {
         push.setLogin(login);
         push.setSessionId(sessionId);
         push.setTextMessage("Пользователь " + login + " подключается в чат");
+        ServerProvider.getInstance().writeRedisEvent("Чат", sessionId, push.getTextMessage());
         push.setType(PushType.INFO);
         pushAll(push);
     }
@@ -68,6 +69,7 @@ public class ChatSessionManager implements WebSocketManager {
             push.setSessionId(sessionId);
             push.setTextMessage("Пользователь " + session.getLogin() + " выходит из чата");
             push.setType(PushType.INFO);
+            ServerProvider.getInstance().writeRedisEvent("Чат", sessionId, push.getTextMessage());
             ServerProvider.getInstance().usersOnline.remove(session.getLogin());
             pushAll(push);
 

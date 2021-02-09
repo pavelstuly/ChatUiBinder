@@ -10,6 +10,7 @@ public class MessageWidget extends HorizontalPanel {
     private Long timestamp;
     private String icon;
     private String text;
+    private String width;
 
     public MessageWidget(String login, String icon, String text, long timestamp, String width) {
         Image image = new Image("" + icon);
@@ -17,19 +18,28 @@ public class MessageWidget extends HorizontalPanel {
         TextArea msg = new TextArea();
         msg.setStyleName("input_style");
         msg.setAlignment(ValueBoxBase.TextAlignment.LEFT);
-        msg.setWidth(width);
+        msg.setWidth("" + (Integer.parseInt(width) - 70));
         msg.setText(text);
         msg.setReadOnly(true);
-        SplitLayoutPanel spl = new SplitLayoutPanel();
         Label label = new Label(login);
         VerticalPanel panel = new VerticalPanel();
         panel.add(label);
         panel.add(msg);
         this.add(image);
         this.add(panel);
+        this.width = width;
 
-        spl.addNorth(new HTML("navigation"), 33);
 
+
+    }
+
+    public String getWidth() {
+        return width;
+    }
+
+    @Override
+    public void setWidth(String width) {
+        this.width = width;
     }
 
     public String getLogin() {

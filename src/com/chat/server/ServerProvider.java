@@ -2,7 +2,9 @@ package com.chat.server;
 
 
 import com.chat.server.webSocket.ChatSessionManager;
+import com.chat.shared.dto.Message;
 import com.google.gson.Gson;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -31,16 +33,29 @@ public class ServerProvider {
 
     public ServerProvider() {
         chatSessionsManager = new ChatSessionManager();
-        System.out.println("start redis");
+
+
+    }
+
+    public void initRedis(Properties properties) {
         try {
+            System.out.println("start redis");
             JedisPoolConfig poolConfig = new JedisPoolConfig();
             poolConfig.setMaxTotal(20);
-            pool = new JedisPool(poolConfig, "localhost");
+            pool = new JedisPool(poolConfig, properties.getProperty("redis.address"));
         } catch (Exception e) {
             System.out.println("err jedis");
         }
         System.out.println("r OK!");
-
     }
 
+    public void writeRedisEvent(String login, String sessionId, String text) {
+        Jedis j = pool.getResource();
+        Message message = new Message();
+        message.setText(text);
+        message.setTimestamp(System.currentTimeMillis());
+        message.setLogin(login);
+        j.set("test:message:" + System.currentTimeMillis(), ServerProvider.getInstance().gson.toJson(message));
+        j.close();
+    }
 }
