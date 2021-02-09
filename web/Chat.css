@@ -24,6 +24,7 @@ body, td, a, div, .p {
     border: solid;
     border-color: black;
     border-radius: 5px;
+    margin-right: 2px;
 }
 
 .elements_diff_style {
@@ -32,16 +33,29 @@ body, td, a, div, .p {
 }
 
 .login_style {
-
+    margin-top: 100px;
     border: solid;
     border-color: black;
     border-radius: 5px;
     border-width: 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .login_units {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 55px;
+
+}
+
+.login_input_style {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.submit_style {
+    margin-top: 5px;
+    margin-left: 65px;
+    margin-bottom: 5px;
+
 }
 .input_style {
     resize: none;

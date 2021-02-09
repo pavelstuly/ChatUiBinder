@@ -17,12 +17,10 @@ public class LoginWidget extends VerticalPanel {
     public LoginWidget() {
 
         login.setMaxLength(30);
-        //login.setWidth("30");
-        // submit.setWidth("10");
-        //  submit.setHeight("5");
         this.add(loginImg);
         this.add(login);
         this.add(submit);
+        login.getElement().setPropertyString("placeholder", "Вводите логин сюда");
         this.setStyleName("login_style");
         login.setFocus(true);
         login.addKeyDownHandler(new KeyDownHandler() {
@@ -37,8 +35,9 @@ public class LoginWidget extends VerticalPanel {
                 doCallback();
             }
         });
-        submit.setStyleName("login_units");
-        login.setStyleName("login_units");
+        submit.setStyleName("submit_style");
+        loginImg.setStyleName("login_units");
+        login.setStyleName("login_input_style");
         this.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
     }
 

@@ -20,6 +20,7 @@ public class TypeWidget extends HorizontalPanel {
         input.setStyleName("input_style");
         this.add(input);
         input.setFocus(true);
+        input.getElement().setPropertyString("placeholder", "Вводите сообщение сюда...");
         Image submit = new Image("images/send.png");
         this.add(submit);
         submit.addClickHandler(new ClickHandler() {
