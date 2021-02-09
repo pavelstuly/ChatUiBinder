@@ -1,49 +1,47 @@
 package com.chat.server.webSocket;
 
-import com.chat.client.Chat;
 import com.chat.server.ServerProvider;
 import com.chat.shared.dto.ChatPush;
 import com.chat.shared.dto.PushMessage;
 import com.chat.shared.dto.PushType;
 
-
-
 import javax.websocket.Session;
 import java.io.IOException;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ChatSessionManager implements WebSocketManager {
 
-   public static ConcurrentHashMap<String, ChatSession> sessions = new ConcurrentHashMap<String, ChatSession>();
+    public static ConcurrentHashMap<String, ChatSession> sessions = new ConcurrentHashMap<String, ChatSession>();
 
-    public int getCount(){
+    public int getCount() {
         return sessions.size();
     }
 
-    public void destroy(){
+    public void destroy() {
 
     }
 
     @Override
     public void addConnection(String sessionId, SocketEndPoint socket) {
-        ChatSession ss=new ChatSession(sessionId,socket);
-        System.out.println("add new "+sessionId);
+        ChatSession ss = new ChatSession(sessionId, socket);
+        System.out.println("add new " + sessionId);
         ss.setSessionId(sessionId);
         ss.setSocket(socket);
         sessions.put(sessionId, ss);
-       // pushTestMessage(sessionId,"test");
+        // pushTestMessage(sessionId,"test");
 
     }
-    public void setUser(String sessionId,String login) {
-        ChatSession session=sessions.get(sessionId);
-        System.out.println(" setting user for "+sessionId+" lg="+login);
+
+    public void setUser(String sessionId, String login) {
+        ChatSession session = sessions.get(sessionId);
+        System.out.println(" setting user for " + sessionId + " lg=" + login);
         session.setLogin(login);
-        sessions.replace(sessionId,session);
-        System.out.println("OK "+sessions.get(sessionId).getLogin());
-        ChatPush push=new ChatPush();
+        sessions.replace(sessionId, session);
+        System.out.println("OK " + sessions.get(sessionId).getLogin());
+        ChatPush push = new ChatPush();
         push.setLogin(login);
         push.setSessionId(sessionId);
-        push.setTextMessage("Пользователь "+login+" подключается в чат");
+        push.setTextMessage("Пользователь " + login + " подключается в чат");
         push.setType(PushType.INFO);
         pushAll(push);
     }
@@ -51,7 +49,7 @@ public class ChatSessionManager implements WebSocketManager {
     @Override
     public void removeConnection(String sessionId) {
         ChatSession session = sessions.get(sessionId);
-        System.out.println("stop session "+sessionId+" !");
+        System.out.println("stop session " + sessionId + " !");
         if (session != null) {
             SocketEndPoint socket = session.getSocket();
             if (socket != null && socket.getSession().isOpen()) {
@@ -62,10 +60,10 @@ public class ChatSessionManager implements WebSocketManager {
                 }
             }
             sessions.remove(sessionId);
-            ChatPush push=new ChatPush();
+            ChatPush push = new ChatPush();
             push.setLogin(session.getLogin());
             push.setSessionId(sessionId);
-            push.setTextMessage("Пользователь "+session.getLogin()+" выходит из чата");
+            push.setTextMessage("Пользователь " + session.getLogin() + " выходит из чата");
             push.setType(PushType.INFO);
             ServerProvider.getInstance().usersOnline.remove(session.getLogin());
             pushAll(push);
@@ -88,7 +86,7 @@ public class ChatSessionManager implements WebSocketManager {
                     }
                 }
             }
-                        }
+        }
 
     }
 
@@ -114,7 +112,6 @@ public class ChatSessionManager implements WebSocketManager {
 
         }
     }
-
 
 
     @Override

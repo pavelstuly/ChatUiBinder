@@ -1,13 +1,12 @@
 package com.chat.server;
 
+import com.chat.client.ChatService;
 import com.chat.shared.dto.ChatPush;
 import com.chat.shared.dto.Message;
 import com.chat.shared.dto.PushType;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.chat.client.ChatService;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

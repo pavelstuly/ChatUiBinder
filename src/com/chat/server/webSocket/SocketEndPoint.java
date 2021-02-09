@@ -1,13 +1,11 @@
 package com.chat.server.webSocket;
 
 
-
 import com.chat.server.ServerProvider;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-
 
 
 @ServerEndpoint(value = "/socket/{client-id}", configurator = WebsocketConfigurator.class)

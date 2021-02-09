@@ -4,7 +4,6 @@ import com.chat.shared.dto.Message;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import java.util.List;
-import java.util.Set;
 
 public interface ChatServiceAsync {
 
@@ -16,7 +15,7 @@ public interface ChatServiceAsync {
 
     void getUsers(AsyncCallback<List<String>> async);
 
-    void sendMessage(String login,String sessionId,String text,AsyncCallback<Void> async);
+    void sendMessage(String login, String sessionId, String text, AsyncCallback<Void> async);
 
     void getMessages(AsyncCallback<List<Message>> async);
 }

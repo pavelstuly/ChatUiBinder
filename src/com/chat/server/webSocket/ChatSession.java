@@ -1,9 +1,6 @@
 package com.chat.server.webSocket;
 
 
-import java.util.HashMap;
-
-
 public class ChatSession {
     private String sessionId;
     private String login;

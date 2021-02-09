@@ -3,13 +3,8 @@ package com.chat.client;
 import com.chat.shared.dto.ChatPush;
 import com.chat.shared.dto.Message;
 import com.chat.shared.dto.PushType;
-import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONValue;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by p.stuly on 09.02.2021.
@@ -50,7 +45,7 @@ public class JsonParser {
     }
 
     public static Message parseMessage(JSONValue value) {
-        Message message=new Message();
+        Message message = new Message();
         JSONObject jsonObject;
         JSONValue jsonValue = value;
         if ((jsonObject = jsonValue.isObject()) != null) {
