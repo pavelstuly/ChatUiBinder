@@ -18,7 +18,7 @@ public class MessageWidget extends HorizontalPanel {
         TextArea msg = new TextArea();
         msg.setStyleName("input_style");
         msg.setAlignment(ValueBoxBase.TextAlignment.LEFT);
-        msg.setWidth("" + (Integer.parseInt(width) - 70));
+        msg.setWidth("" + (Integer.parseInt(width) - 86));
         msg.setText(text);
         msg.setReadOnly(true);
         Label label = new Label(login);
