@@ -37,7 +37,9 @@ public class LoginWidget extends VerticalPanel {
                 doCallback();
             }
         });
-
+        submit.setStyleName("login_units");
+        login.setStyleName("login_units");
+        this.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
     }
 
     private void doCallback() {

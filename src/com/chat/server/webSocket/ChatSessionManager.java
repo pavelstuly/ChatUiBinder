@@ -1,5 +1,6 @@
 package com.chat.server.webSocket;
 
+import com.chat.client.Chat;
 import com.chat.server.ServerProvider;
 import com.chat.shared.dto.ChatPush;
 import com.chat.shared.dto.PushMessage;
@@ -28,7 +29,9 @@ public class ChatSessionManager implements WebSocketManager {
         ss.setSessionId(sessionId);
         ss.setSocket(socket);
         sessions.put(sessionId, ss);
-        // pushTestMessage(sessionId,"test");
+        ChatPush regPush = new ChatPush();
+        regPush.setType(PushType.REG);
+        pushTestMessage(sessionId, ServerProvider.getInstance().gson.toJson(regPush));
 
     }
 

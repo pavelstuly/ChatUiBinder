@@ -12,11 +12,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainWidget extends HorizontalPanel {
-    private String sessionId;
+    private static String sessionId;
     public static String lg;
     public static List<String> userList = new ArrayList();
     public static MessagesWidget mv = null;
@@ -74,34 +75,75 @@ public class MainWidget extends HorizontalPanel {
 
     }
 
+    public static void connect() {
+
+        ChatService.App.getInstance().setUser(sessionId, lg, new AsyncCallback<Void>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert("error" + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(Void result) {
+                ChatService.App.getInstance().getMessages(new AsyncCallback<List<Message>>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        Window.alert("error" + caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(List<Message> result) {
+                        for (Message m : result) {
+                            mv.addMessage(new MessageWidget(m.getLogin(), lg.equals(m.getLogin()) ? "images/me_pic.png" : "images/user_male.png", m.getText(), 1242353, "" + (Window.getClientWidth() - 310)));
+
+                        }
+                        mv.scrollToBottom();
+                    }
+                });
+            }
+        });
+    }
     public static void OnPushReceived(String pushMsg) {
         ChatPush push = (new JsonParser().parsePush(JSONParser.parseStrict(pushMsg)));
-        if (push.getType() == PushType.INFO) {
-            ChatService.App.getInstance().getUsers(new AsyncCallback<List<String>>() {
-                @Override
-                public void onFailure(Throwable caught) {
-                    Window.alert(caught.getMessage());
-                }
-
-                @Override
-                public void onSuccess(List<String> result) {
-                    uv.clearPersons();
-                    for (String s : result) {
-
-                        UserWidget userWidget = new UserWidget(s, (lg.equals(s)) ? "images/me_pic.png" : "images/user_male.png", 200);
-                        uv.addPerson(userWidget);
-
-
+        switch (push.getType()) {
+            case INFO: {
+                ChatService.App.getInstance().getUsers(new AsyncCallback<List<String>>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        Window.alert(caught.getMessage());
                     }
-                    mv.addMessage(new MessageWidget("Чат", "images/chat.png", push.getTextMessage(), 43534, "" + (Window.getClientWidth() - 310)));
-                    mv.scrollToBottom();
-                }
-            });
+
+                    @Override
+                    public void onSuccess(List<String> result) {
+                        uv.clearPersons();
+                        for (String s : result) {
+
+                            UserWidget userWidget = new UserWidget(s, (lg.equals(s)) ? "images/me_pic.png" : "images/user_male.png", 200);
+                            uv.addPerson(userWidget);
+
+
+                        }
+                        mv.addMessage(new MessageWidget("Чат", "images/chat.png", push.getTextMessage(), 43534, "" + (Window.getClientWidth() - 350)));
+                        mv.scrollToBottom();
+                    }
+                });
+            }
+            break;
+            case REG: {
+                connect();
+            }
+            break;
+            case MESSAGE: {
+                mv.addMessage(new MessageWidget(push.getLogin(), (lg.equals(lg)) ? "images/me_pic.png" : "images/user_male.png", push.getTextMessage(), 43534, "" + (Window.getClientWidth() - 350)));
+                mv.scrollToBottom();
+            }
+            break;
+            default:
+                Window.alert("Неизвестный пуш");
+                break;
         }
-        if (push.getType() == PushType.MESSAGE) {
-            mv.addMessage(new MessageWidget(push.getLogin(), (lg.equals(lg)) ? "images/me_pic.png" : "images/user_male.png", push.getTextMessage(), 43534, "" + (Window.getClientWidth() - 310)));
-        }
-        mv.scrollToBottom();
+
+
     }
 
     public String getSessionId() {

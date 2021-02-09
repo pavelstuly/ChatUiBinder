@@ -15,6 +15,7 @@ public class MessageWidget extends HorizontalPanel {
         Image image = new Image("" + icon);
         this.setStyleName("message_widget_style");
         TextArea msg = new TextArea();
+        msg.setStyleName("input_style");
         msg.setAlignment(ValueBoxBase.TextAlignment.LEFT);
         msg.setWidth(width);
         msg.setText(text);

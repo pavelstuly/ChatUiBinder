@@ -25,10 +25,11 @@ public class TypeWidget extends HorizontalPanel {
         submit.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-
-                doCallback(login, sess, input.getText());
-                input.setText("");
-                input.setCursorPos(0);
+                if (input.getText().length() > 0) {
+                    doCallback(login, sess, input.getText());
+                    input.setText("");
+                    input.setCursorPos(0);
+                }
             }
         });
 
