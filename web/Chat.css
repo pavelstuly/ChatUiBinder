@@ -1,0 +1,39 @@
+/** Add css rules here for your application. */
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+body, td, a, div, .p {
+    font-family: arial, sans-serif
+}
+.message_widget_style {
+border: solid;
+    border-color: black;
+    border-radius: 5px;
+}
+.user_widget_style {
+    border-bottom: 1px solid gray;
+    margin-top: 5px;
+}
+.users_widget_style {
+    border: solid;
+    border-color: black;
+    border-radius: 5px;
+}
+.elements_diff_style{
+      text-align: left;
+      margin-top: 5px;
+  }
+.login_style{
+    text-align: center;
+    border: solid;
+    border-color: black;
+    border-radius: 5px;
+    border-width: 2px;
+}
+.input_style{
+    resize: none;
+}

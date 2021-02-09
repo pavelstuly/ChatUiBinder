@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="mchange-commons-java-0.2.7">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/mchange-commons-java-0.2.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.21.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-log4j12-1.7.21.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/stax-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Chat">
+    <output-path>C:/apache-tomcat-8.5.61/webapps/Chat</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Chat/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Chat" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="C:/gwt-2.9.0/gwt-servlet.jar" />
+          <element id="dir-copy" path="$PROJECT_DIR$/lib" />
+        </element>
+        <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/config.properties" />
+      </element>
+      <element id="gwt-compiler-output" facet="Chat/gwt/GWT" />
+      <element id="directory" name="images">
+        <element id="dir-copy" path="$PROJECT_DIR$/web/images" />
+      </element>
+    </root>
+  </artifact>
+</component>

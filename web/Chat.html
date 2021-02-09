@@ -1,0 +1,60 @@
+<html>
+<head>
+
+    <!--                                           -->
+    <!-- Any title is fine                         -->
+    <!--                                           -->
+    <title>Test Chat</title>
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="Chat.css">
+
+    <!--                                            -->
+    <!-- This script is required bootstrap stuff.   -->
+    <!--                                            -->
+    <script type="text/javascript" language="javascript" src="Chat/Chat.nocache.js"></script>
+</head>
+<script type="text/javascript">
+    // Web Socket
+    var address = window.location.hostname + ":7076/Chat";
+    var wsocket;
+
+    function connect(conId) {
+        wsocket = new WebSocket('ws://' + address + '/socket/' + conId);
+
+
+        wsocket.onclose = function (evt) {
+            window.location.reload();
+        };
+
+        wsocket.onerror = function (evt) {
+            window.location.reload();
+        };
+
+        wsocket.onmessage = onMessage;
+    }
+
+    function onMessage(evt) {
+        window.exposedMethod(evt.data);
+    }
+
+    // UUID
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+</script>
+
+<body>
+
+<h1>Общий чат</h1>
+
+
+<table align="center">
+    <tr>
+        <td id="slot2"></td>
+    </tr>
+</table>
+</body>
+</html>
