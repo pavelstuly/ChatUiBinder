@@ -1,6 +1,7 @@
 package com.chat.client;
 
-import com.chat.client.widgets.LoginWidget;
+
+import com.chat.client.widgets.uibinderversion.Login;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -11,11 +12,7 @@ public class Chat implements EntryPoint {
 
 
     public void onModuleLoad() {
-
-
-        LoginWidget lw = new LoginWidget();
-        RootPanel.get("slot2").add(lw);
-
+        RootPanel.get().add(new Login());
 
     }
 

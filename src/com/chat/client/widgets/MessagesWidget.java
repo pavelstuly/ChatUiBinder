@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.*;
 public class MessagesWidget extends ScrollPanel {
     VerticalPanel panel = new VerticalPanel();
     String width;
+
     public MessagesWidget(String name, String icon, String width) {
         Image image = new Image("" + icon);
         Label label = new Label(name);

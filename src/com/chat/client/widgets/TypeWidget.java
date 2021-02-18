@@ -11,7 +11,11 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.ValueBoxBase;
 
 public class TypeWidget extends HorizontalPanel {
-    public TypeWidget(String length, String login, String sess) {
+    String length;
+    String login;
+    String sess;
+
+    public TypeWidget() {
         this.setWidth(length);
         TextArea input = new TextArea();
         input.setWidth("" + (Integer.parseInt(length) - 64));
@@ -35,6 +39,12 @@ public class TypeWidget extends HorizontalPanel {
         });
 
 
+    }
+
+    public void init(String length, String login, String sess) {
+        this.length = length;
+        this.login = login;
+        this.sess = sess;
     }
 
     private void doCallback(String login, String sess, String text) {

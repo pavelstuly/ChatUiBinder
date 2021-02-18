@@ -1,0 +1,29 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:res='urn:import:com.chat.client.widgets.uibinderversion.CssRes '>
+    <g:HTMLPanel>
+        <div align="center">
+            <g:HorizontalPanel verticalAlignment="top">
+                <g:ScrollPanel ui:field="userCont" res:styleName="users_widget_style">
+                    <g:VerticalPanel ui:field="userList">
+
+                    </g:VerticalPanel>
+                </g:ScrollPanel>
+                <g:VerticalPanel>
+                    <g:ScrollPanel ui:field="msgCont" res:styleName="users_widget_style">
+                        <g:VerticalPanel ui:field="messageList">
+
+                        </g:VerticalPanel>
+                    </g:ScrollPanel>
+                    <g:HorizontalPanel>
+                        <g:TextArea ui:field="input" res:styleName="input_style">
+                        </g:TextArea>
+                        <g:Image ui:field="submit" res:styleName="submit_style">
+                        </g:Image>
+                    </g:HorizontalPanel>
+                </g:VerticalPanel>
+
+            </g:HorizontalPanel>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>

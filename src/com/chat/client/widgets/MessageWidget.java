@@ -30,7 +30,6 @@ public class MessageWidget extends HorizontalPanel {
         this.width = width;
 
 
-
     }
 
     public String getWidth() {

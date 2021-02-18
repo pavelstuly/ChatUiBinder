@@ -1,0 +1,22 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:gwt='urn:import:com.google.gwt.user.client.ui'
+             xmlns:res='urn:import:com.chat.client.widgets.uibinderversion.CssRes '>
+
+
+    <ui:with type="com.chat.client.widgets.uibinderversion.CssRes" field="res">
+    </ui:with>
+    <gwt:HTMLPanel>
+        <div align="center">
+
+            <gwt:VerticalPanel res:styleName="login_style">
+                <gwt:Label text="Login"/>
+                <gwt:TextBox ui:field="loginBox"/>
+                <gwt:HorizontalPanel verticalAlignment="middle">
+                    <gwt:Button ui:field="buttonSubmit" text="Submit"/>
+                </gwt:HorizontalPanel>
+            </gwt:VerticalPanel>
+
+        </div>
+    </gwt:HTMLPanel>
+
+</ui:UiBinder>

@@ -1,6 +1,5 @@
 package com.chat.server.webSocket;
 
-import com.chat.client.Chat;
 import com.chat.server.ServerProvider;
 import com.chat.shared.dto.ChatPush;
 import com.chat.shared.dto.PushMessage;
